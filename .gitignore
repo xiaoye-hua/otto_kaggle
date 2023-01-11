@@ -25,4 +25,8 @@ test/resources/output
 .vscode
 
 # Dataset
-data
+data/*
+.idea/*
+out/*
+out_cv/*
+model_training/*
