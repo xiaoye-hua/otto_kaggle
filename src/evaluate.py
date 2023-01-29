@@ -134,7 +134,7 @@ def get_scores(labels: dict[int, dict],
 
 
 @beartype
-def main(labels_path: Path, predictions_path: Path):
+def main(labels_path: Path, predictions_path: Path, k: int):
     with open(labels_path, "r") as f:
         logging.info(f"Reading labels from {labels_path}")
         labels = f.readlines()
@@ -146,7 +146,7 @@ def main(labels_path: Path, predictions_path: Path):
         predictions = prepare_predictions(predictions)
         logging.info(f"Read {len(predictions)} predictions")
     logging.info("Calculating scores")
-    scores = get_scores(labels, predictions)
+    scores = get_scores(labels, predictions, k=k)
     logging.info(f"Scores: {scores}")
 
 
@@ -155,5 +155,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--test-labels', default="resources/test_labels.jsonl", type=str)
     parser.add_argument('--predictions', default="resources/predictions.csv", type=str)
+    parser.add_argument('--k', default=20, type=int)
     args = parser.parse_args()
-    main(Path(args.test_labels), Path(args.predictions))
+    main(Path(args.test_labels), Path(args.predictions), k=args.k)

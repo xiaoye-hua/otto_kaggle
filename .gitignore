@@ -30,3 +30,4 @@ data/*
 out/*
 out_cv/*
 model_training/*
+submission/*
